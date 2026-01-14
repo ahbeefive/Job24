@@ -1,0 +1,31 @@
+{
+  "name": "job-portal-website",
+  "version": "1.0.0",
+  "description": "A modern recruitment website with admin panel for managing job postings",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static site - no build needed'",
+    "start": "npx serve .",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "jobs",
+    "recruitment",
+    "website",
+    "admin-panel",
+    "html",
+    "javascript",
+    "css"
+  ],
+  "author": "Job Portal Team",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/job-portal-website.git"
+  },
+  "homepage": "https://your-job-portal.vercel.app"
+}

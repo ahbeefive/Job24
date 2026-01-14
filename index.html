@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobPortal - Find Your Dream Job</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="jobs-data.js"></script>
+    <script src="config.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">JobPortal</h1>
+        </div>
+    </header>
+
+    <section class="hero" data-hero-template="gradient">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Job Opportunity</h1>
+                <p>Discover amazing career opportunities with top companies</p>
+            </div>
+            <div class="hero-visual" style="display: none;">
+                <span>🚀 Your Career Starts Here</span>
+            </div>
+        </div>
+    </section>
+
+    <main class="main">
+        <div class="container">
+            <h2>Available Positions</h2>
+            <div class="jobs-grid" id="jobsGrid">
+                <!-- Default jobs will be loaded here -->
+                <div class="job-card">
+                    <img src="https://via.placeholder.com/400x200/4f46e5/ffffff?text=Frontend+Developer" alt="Frontend Developer" class="job-image">
+                    <div class="job-content">
+                        <h3 class="job-title">Frontend Developer</h3>
+                        <div class="job-meta">
+                            <span class="salary">💰 $60,000 - $80,000</span>
+                            <span class="location">📍 New York, NY</span>
+                        </div>
+                        <div class="job-requirements">
+                            <p>3+ years experience with React, JavaScript, HTML, CSS. Strong understanding of responsive design and modern frontend frameworks.</p>
+                        </div>
+                        <a href="https://example.com/apply/frontend" class="apply-btn" target="_blank">Apply Now</a>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <img src="https://via.placeholder.com/400x200/059669/ffffff?text=Backend+Developer" alt="Backend Developer" class="job-image">
+                    <div class="job-content">
+                        <h3 class="job-title">Backend Developer</h3>
+                        <div class="job-meta">
+                            <span class="salary">💰 $70,000 - $90,000</span>
+                            <span class="location">📍 San Francisco, CA</span>
+                        </div>
+                        <div class="job-requirements">
+                            <p>5+ years experience with Node.js, Python, or Java. Database design and optimization skills.</p>
+                        </div>
+                        <a href="https://example.com/apply/backend" class="apply-btn" target="_blank">Apply Now</a>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <img src="https://via.placeholder.com/400x200/ec4899/ffffff?text=UI%2FUX+Designer" alt="UI/UX Designer" class="job-image">
+                    <div class="job-content">
+                        <h3 class="job-title">UI/UX Designer</h3>
+                        <div class="job-meta">
+                            <span class="salary">💰 $55,000 - $75,000</span>
+                            <span class="location">📍 Remote</span>
+                        </div>
+                        <div class="job-requirements">
+                            <p>Portfolio showcasing user-centered design solutions. Proficiency in Figma, Sketch, or Adobe Creative Suite.</p>
+                        </div>
+                        <a href="https://example.com/apply/designer" class="apply-btn" target="_blank">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="settings.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

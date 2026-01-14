@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - JobPortal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin-styles.css?v=3">
+</head>
+<body>
+    <div class="admin-container">
+        <header class="admin-header">
+            <div class="header-left">
+                <h1>JobPortal Dashboard</h1>
+                <span class="status-indicator">🟢 Live</span>
+            </div>
+            <div class="header-right">
+                <span id="currentUser">Welcome, Admin</span>
+                <button id="viewSiteBtn" class="btn btn-outline" onclick="window.open('index.html', '_blank')">View Site</button>
+                <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+            </div>
+        </header>
+
+        <div class="admin-content">
+            <aside class="sidebar">
+                <nav class="nav-menu">
+                    <button class="nav-item active" data-section="jobs">
+                        <span class="nav-icon">💼</span>
+                        <span>Manage Jobs</span>
+                    </button>
+                    <button class="nav-item" data-section="settings">
+                        <span class="nav-icon">⚙️</span>
+                        <span>Settings</span>
+                    </button>
+                    <button class="nav-item" data-section="analytics">
+                        <span class="nav-icon">📊</span>
+                        <span>Analytics</span>
+                    </button>
+                    <button class="nav-item" data-section="export">
+                        <span class="nav-icon">📤</span>
+                        <span>Export for GitHub</span>
+                    </button>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <!-- Jobs Management Section -->
+                <section id="jobs-section" class="content-section active">
+                    <div class="section-header">
+                        <div>
+                            <h2>Job Listings</h2>
+                            <p class="section-subtitle">Drag jobs to reorder • Click titles to edit • Select for bulk actions</p>
+                        </div>
+                        <button id="addJobBtn" class="btn btn-primary">+ Add New Job</button>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="totalJobs">0</div>
+                            <div class="stat-label">Total Jobs</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="activeJobs">0</div>
+                            <div class="stat-label">Active Jobs</div>
+                        </div>
+                    </div>
+
+                    <div class="jobs-container">
+                        <div class="jobs-controls">
+                            <div class="bulk-actions" id="bulkActions" style="display: none;">
+                                <span id="selectedCount">0 selected</span>
+                                <button id="bulkDeleteBtn" class="btn btn-danger btn-sm">🗑️ Delete Selected</button>
+                                <button id="selectAllBtn" class="btn btn-outline btn-sm">Select All</button>
+                                <button id="clearSelectionBtn" class="btn btn-outline btn-sm">Clear</button>
+                            </div>
+                            <input type="search" id="searchJobs" placeholder="Search jobs..." class="search-input">
+                        </div>
+                        
+                        <div class="jobs-table sortable-list" id="jobsTable">
+                            <!-- Jobs will be loaded here with drag and drop -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings-section" class="content-section">
+                    <div class="section-header">
+                        <div>
+                            <h2>Settings</h2>
+                            <p class="section-subtitle">Configure your website and upload settings</p>
+                        </div>
+                    </div>
+
+                    <div class="settings-grid">
+                        <!-- Site Settings -->
+                        <div class="settings-card">
+                            <h3>📝 Site Information</h3>
+                            <div class="form-group">
+                                <label for="siteTitle">Site Title</label>
+                                <input type="text" id="siteTitle" value="JobPortal">
+                            </div>
+                            <div class="form-group">
+                                <label for="siteDescription">Site Description</label>
+                                <textarea id="siteDescription" rows="3">Discover amazing career opportunities with top companies</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="heroTitle">Hero Title</label>
+                                <input type="text" id="heroTitle" value="Job Opportunity">
+                            </div>
+                            <div class="form-group">
+                                <label for="heroSubtitle">Hero Subtitle</label>
+                                <input type="text" id="heroSubtitle" value="Discover amazing career opportunities with top companies">
+                            </div>
+                            <button id="saveSiteInfoBtn" class="btn btn-primary">💾 Save Site Settings</button>
+                        </div>
+
+                        <!-- Image Upload Setup -->
+                        <div class="settings-card">
+                            <h3>📸 Easy Image Upload</h3>
+                            <div class="upload-setup-tabs">
+                                <button class="tab-btn active" data-tab="cloudinary">☁️ Cloudinary (Recommended)</button>
+                                <button class="tab-btn" data-tab="google">🔐 Google Drive</button>
+                            </div>
+                            
+                            <!-- Cloudinary Tab -->
+                            <div class="tab-content active" id="cloudinary-tab">
+                                <div class="setup-status" id="cloudinarySetupStatus">
+                                    <span class="status-dot">🔴</span>
+                                    <span>Not configured</span>
+                                </div>
+                                <div class="simple-setup">
+                                    <p>Just 3 fields needed from <a href="https://cloudinary.com/console" target="_blank">Cloudinary Dashboard</a>:</p>
+                                    <div class="form-group">
+                                        <label for="cloudinaryName">Cloud Name</label>
+                                        <input type="text" id="cloudinaryName" placeholder="your-cloud-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="apiKey">API Key</label>
+                                        <input type="text" id="apiKey" placeholder="123456789012345">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="apiSecret">API Secret</label>
+                                        <input type="password" id="apiSecret" placeholder="your-api-secret">
+                                    </div>
+                                    <div class="setup-actions">
+                                        <button id="testCloudinaryBtn" class="btn btn-outline">🧪 Test Connection</button>
+                                        <button id="saveCloudinaryBtn" class="btn btn-primary">💾 Save & Enable</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Google Tab -->
+                            <div class="tab-content" id="google-tab">
+                                <div class="setup-status" id="googleSetupStatus">
+                                    <span class="status-dot">🔴</span>
+                                    <span>Not configured</span>
+                                </div>
+                                <div class="simple-setup">
+                                    <p>Just 1 field needed from <a href="https://console.cloud.google.com/apis/credentials" target="_blank">Google Console</a>:</p>
+                                    <div class="form-group">
+                                        <label for="googleSimpleClientId">OAuth Client ID</label>
+                                        <input type="text" id="googleSimpleClientId" placeholder="123456789012-example.apps.googleusercontent.com">
+                                        <small class="help-text">Create OAuth 2.0 Client ID → Web application</small>
+                                    </div>
+                                    <div class="setup-actions">
+                                        <button id="testGoogleBtn" class="btn btn-outline">🧪 Test Connection</button>
+                                        <button id="saveGoogleBtn" class="btn btn-primary">💾 Save & Enable</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Theme & Template Settings -->
+                        <div class="settings-card">
+                            <h3>🎨 Website Theme</h3>
+                            <div class="form-group">
+                                <label for="themeSelect">Choose Color Theme</label>
+                                <select id="themeSelect">
+                                    <option value="blue">Blue Professional</option>
+                                    <option value="purple">Purple Modern</option>
+                                    <option value="green">Green Fresh</option>
+                                    <option value="orange">Orange Creative</option>
+                                    <option value="red">Red Bold</option>
+                                    <option value="pink">Pink Vibrant</option>
+                                    <option value="teal">Teal Cool</option>
+                                    <option value="dark">Dark Mode</option>
+                                </select>
+                            </div>
+                            <div class="theme-preview" id="themePreview">
+                                <div class="color-preview" style="background: #4f46e5;"></div>
+                                <div class="color-preview" style="background: #06b6d4;"></div>
+                                <div class="color-preview" style="background: #10b981;"></div>
+                            </div>
+                            <button id="saveThemeBtn" class="btn btn-primary">🎨 Apply Theme</button>
+                        </div>
+
+                        <!-- Template Settings -->
+                        <div class="settings-card">
+                            <h3>📱 Website Template</h3>
+                            <div class="form-group">
+                                <label for="templateSelect">Choose Layout</label>
+                                <select id="templateSelect">
+                                    <option value="modern">Modern Cards</option>
+                                    <option value="classic">Classic List</option>
+                                    <option value="grid">Grid Layout</option>
+                                    <option value="minimal">Minimal Design</option>
+                                </select>
+                            </div>
+                            <div class="template-preview" id="templatePreview">
+                                <img src="https://via.placeholder.com/300x150/4f46e5/ffffff?text=Modern+Cards" alt="Template Preview">
+                            </div>
+                            <button id="saveTemplateBtn" class="btn btn-primary">📱 Apply Template</button>
+                        </div>
+
+                        <!-- Hero Section Settings -->
+                        <div class="settings-card">
+                            <h3>🖼️ Hero Section</h3>
+                            <div class="form-group">
+                                <label for="heroTemplate">Hero Style</label>
+                                <select id="heroTemplate">
+                                    <option value="gradient">Gradient Background</option>
+                                    <option value="image">Image Background</option>
+                                    <option value="split">Split Layout</option>
+                                    <option value="minimal">Minimal Clean</option>
+                                    <option value="animated">Animated Gradient</option>
+                                </select>
+                            </div>
+                            <div class="hero-preview" id="heroPreview">
+                                <img src="https://via.placeholder.com/300x120/4f46e5/ffffff?text=Gradient+Hero" alt="Hero Preview">
+                            </div>
+                            <button id="saveHeroBtn" class="btn btn-primary">🖼️ Update Hero</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Analytics Section -->
+                <section id="analytics-section" class="content-section">
+                    <div class="section-header">
+                        <div>
+                            <h2>Analytics & Overview</h2>
+                            <p class="section-subtitle">Track your website performance and activity</p>
+                        </div>
+                    </div>
+
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <h3>📊 Website Stats</h3>
+                            <div class="stats-list">
+                                <div class="stat-item">
+                                    <span class="stat-icon">💼</span>
+                                    <div class="stat-info">
+                                        <span class="stat-number" id="analyticsJobCount">0</span>
+                                        <span class="stat-label">Active Jobs</span>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-icon">👀</span>
+                                    <div class="stat-info">
+                                        <span class="stat-number">24</span>
+                                        <span class="stat-label">Views Today</span>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-icon">🌍</span>
+                                    <div class="stat-info">
+                                        <span class="stat-number">Live</span>
+                                        <span class="stat-label">Website Status</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="analytics-card">
+                            <h3>🔗 Quick Links</h3>
+                            <div class="quick-actions">
+                                <button class="quick-action-btn" onclick="window.open('index.html', '_blank')">
+                                    <span class="action-icon">🌐</span>
+                                    <div class="action-info">
+                                        <span class="action-title">View Live Site</span>
+                                        <span class="action-desc">See your job portal</span>
+                                    </div>
+                                </button>
+                                <button class="quick-action-btn" onclick="window.open('https://github.com', '_blank')">
+                                    <span class="action-icon">📁</span>
+                                    <div class="action-info">
+                                        <span class="action-title">GitHub Repository</span>
+                                        <span class="action-desc">Manage your code</span>
+                                    </div>
+                                </button>
+                                <button class="quick-action-btn" onclick="window.open('https://vercel.com', '_blank')">
+                                    <span class="action-icon">🚀</span>
+                                    <div class="action-info">
+                                        <span class="action-title">Vercel Dashboard</span>
+                                        <span class="action-desc">Deployment settings</span>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="analytics-card">
+                            <h3>⚡ Recent Activity</h3>
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <span class="activity-icon">✅</span>
+                                    <div class="activity-info">
+                                        <span class="activity-text">Admin panel loaded successfully</span>
+                                        <span class="activity-time">Just now</span>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <span class="activity-icon">💼</span>
+                                    <div class="activity-info">
+                                        <span class="activity-text">Job listings ready for management</span>
+                                        <span class="activity-time">Today</span>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <span class="activity-icon">🌐</span>
+                                    <div class="activity-info">
+                                        <span class="activity-text">Website is live and accessible</span>
+                                        <span class="activity-time">Today</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="analytics-card">
+                            <h3>🛠️ System Health</h3>
+                            <div class="health-list">
+                                <div class="health-item">
+                                    <span class="health-status good">🟢</span>
+                                    <span class="health-label">Website Online</span>
+                                </div>
+                                <div class="health-item">
+                                    <span class="health-status" id="uploadHealth">🔴</span>
+                                    <span class="health-label">Image Upload</span>
+                                </div>
+                                <div class="health-item">
+                                    <span class="health-status good">🟢</span>
+                                    <span class="health-label">Admin Panel</span>
+                                </div>
+                                <div class="health-item">
+                                    <span class="health-status" id="githubHealth">🔴</span>
+                                    <span class="health-label">GitHub Sync</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Export Section -->
+                <section id="export-section" class="content-section">
+                    <div class="section-header">
+                        <div>
+                            <h2>📤 Export for GitHub</h2>
+                            <p class="section-subtitle">Generate updated code to deploy for all visitors</p>
+                        </div>
+                    </div>
+
+                    <div class="export-container">
+                        <div class="export-card">
+                            <h3>🎯 How It Works</h3>
+                            <ol class="export-steps">
+                                <li><strong>Make Changes</strong> - Add/edit jobs and settings in admin panel</li>
+                                <li><strong>Click Export</strong> - Generate updated jobs-data.js file</li>
+                                <li><strong>Copy Code</strong> - Copy the generated code</li>
+                                <li><strong>Update GitHub</strong> - Replace jobs-data.js in your repository</li>
+                                <li><strong>Auto Deploy</strong> - Vercel automatically deploys changes</li>
+                                <li><strong>All Visitors See Updates</strong> - Changes are live for everyone!</li>
+                            </ol>
+                        </div>
+
+                        <div class="export-card">
+                            <h3>📊 Current Data</h3>
+                            <div class="export-stats">
+                                <div class="export-stat">
+                                    <span class="export-stat-number" id="exportJobCount">0</span>
+                                    <span class="export-stat-label">Jobs to Export</span>
+                                </div>
+                                <div class="export-stat">
+                                    <span class="export-stat-number">✅</span>
+                                    <span class="export-stat-label">Settings Configured</span>
+                                </div>
+                            </div>
+                            <button id="generateExportBtn" class="btn btn-primary btn-large">
+                                📤 Generate Export Code
+                            </button>
+                        </div>
+
+                        <div class="export-card" id="exportCodeCard" style="display: none;">
+                            <div class="export-header">
+                                <h3>📋 Generated Code</h3>
+                                <button id="copyExportBtn" class="btn btn-success">📋 Copy to Clipboard</button>
+                            </div>
+                            <p class="export-instructions">
+                                <strong>Instructions:</strong><br>
+                                1. Click "Copy to Clipboard" below<br>
+                                2. Open <code>jobs-data.js</code> in your GitHub repository<br>
+                                3. Replace all content with the copied code<br>
+                                4. Commit changes<br>
+                                5. Vercel will auto-deploy (1-2 minutes)<br>
+                                6. All visitors will see your updates!
+                            </p>
+                            <div class="export-code-container">
+                                <pre id="exportCode" class="export-code"></pre>
+                            </div>
+                        </div>
+
+                        <div class="export-card">
+                            <h3>💡 Tips</h3>
+                            <ul class="export-tips">
+                                <li>✅ Test changes locally before exporting</li>
+                                <li>✅ Export after making multiple changes (not after each job)</li>
+                                <li>✅ Keep a backup of your previous jobs-data.js</li>
+                                <li>✅ Vercel deploys automatically when you push to GitHub</li>
+                                <li>✅ Changes are live for all visitors after deployment</li>
+                                <li>✅ No need to clear cache - updates are instant</li>
+                            </ul>
+                        </div>
+
+                        <div class="export-card">
+                            <h3>🔄 Quick Update Process</h3>
+                            <div class="quick-update-steps">
+                                <div class="update-step">
+                                    <span class="step-number">1</span>
+                                    <div class="step-content">
+                                        <strong>Edit in Admin Panel</strong>
+                                        <p>Add/edit jobs and change settings</p>
+                                    </div>
+                                </div>
+                                <div class="update-step">
+                                    <span class="step-number">2</span>
+                                    <div class="step-content">
+                                        <strong>Generate & Copy</strong>
+                                        <p>Click export and copy the code</p>
+                                    </div>
+                                </div>
+                                <div class="update-step">
+                                    <span class="step-number">3</span>
+                                    <div class="step-content">
+                                        <strong>Update GitHub</strong>
+                                        <p>Paste into jobs-data.js and commit</p>
+                                    </div>
+                                </div>
+                                <div class="update-step">
+                                    <span class="step-number">4</span>
+                                    <div class="step-content">
+                                        <strong>Live for All!</strong>
+                                        <p>Vercel deploys automatically</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Job Form Modal -->
+    <div id="jobModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add New Job</h3>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <form id="jobForm" class="job-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="jobTitle">Job Title *</label>
+                        <input type="text" id="jobTitle" required placeholder="e.g. Frontend Developer">
+                    </div>
+                    <div class="form-group">
+                        <label for="jobLocation">Location *</label>
+                        <input type="text" id="jobLocation" required placeholder="e.g. New York, NY">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="jobSalary">Salary Range *</label>
+                        <input type="text" id="jobSalary" required placeholder="e.g. $60,000 - $80,000">
+                    </div>
+                    <div class="form-group">
+                        <label for="applyLink">Apply Link</label>
+                        <input type="url" id="applyLink" placeholder="https://company.com/apply">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="jobRequirements">Job Requirements *</label>
+                    <textarea id="jobRequirements" rows="4" required placeholder="Describe the job requirements, skills needed, experience level..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Job Image</label>
+                    <div class="image-upload-section">
+                        <!-- Easy Upload Options -->
+                        <div class="upload-options">
+                            <button type="button" id="uploadImageBtn" class="btn btn-primary upload-option">
+                                📷 Upload from Computer
+                            </button>
+                            <button type="button" id="useUrlBtn" class="btn btn-outline upload-option">
+                                🔗 Use Image URL
+                            </button>
+                            <button type="button" id="generateImageBtn" class="btn btn-outline upload-option">
+                                🎨 Generate Placeholder
+                            </button>
+                            <button type="button" id="quickImagesBtn" class="btn btn-outline upload-option">
+                                ⚡ Quick Images
+                            </button>
+                        </div>
+                        
+                        <!-- Quick Images Section -->
+                        <div id="quickImagesSection" class="quick-images-section" style="display: none;">
+                            <p>Choose from these ready-to-use images:</p>
+                            <div class="quick-images-grid">
+                                <div class="quick-image" data-url="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=200&fit=crop">
+                                    <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=200&h=100&fit=crop" alt="Developer">
+                                    <span>Developer</span>
+                                </div>
+                                <div class="quick-image" data-url="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=200&fit=crop">
+                                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=200&h=100&fit=crop" alt="Designer">
+                                    <span>Designer</span>
+                                </div>
+                                <div class="quick-image" data-url="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=200&fit=crop">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=100&fit=crop" alt="Manager">
+                                    <span>Manager</span>
+                                </div>
+                                <div class="quick-image" data-url="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=200&fit=crop">
+                                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=100&fit=crop" alt="Marketing">
+                                    <span>Marketing</span>
+                                </div>
+                                <div class="quick-image" data-url="https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=200&fit=crop">
+                                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=200&h=100&fit=crop" alt="Team Work">
+                                    <span>Team Work</span>
+                                </div>
+                                <div class="quick-image" data-url="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=400&h=200&fit=crop">
+                                    <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=200&h=100&fit=crop" alt="Office">
+                                    <span>Office</span>
+                                </div>
+                            </div>
+                            <div class="quick-actions">
+                                <button type="button" id="cancelQuickImagesBtn" class="btn btn-secondary btn-sm">Cancel</button>
+                            </div>
+                        </div>
+                        
+                        <!-- URL Input (hidden by default) -->
+                        <div id="urlInputSection" class="url-input-section" style="display: none;">
+                            <input type="url" id="imageUrlInput" placeholder="https://example.com/image.jpg" class="form-control">
+                            <div class="url-actions">
+                                <button type="button" id="previewUrlBtn" class="btn btn-outline btn-sm">Preview</button>
+                                <button type="button" id="useUrlImageBtn" class="btn btn-primary btn-sm">Use This Image</button>
+                                <button type="button" id="cancelUrlBtn" class="btn btn-secondary btn-sm">Cancel</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Placeholder Generator (hidden by default) -->
+                        <div id="placeholderSection" class="placeholder-section" style="display: none;">
+                            <div class="placeholder-options">
+                                <label>Choose Style:</label>
+                                <select id="placeholderStyle" class="form-control">
+                                    <option value="professional">Professional Blue</option>
+                                    <option value="modern">Modern Purple</option>
+                                    <option value="creative">Creative Orange</option>
+                                    <option value="tech">Tech Green</option>
+                                    <option value="business">Business Gray</option>
+                                </select>
+                            </div>
+                            <div class="placeholder-actions">
+                                <button type="button" id="generatePlaceholderBtn" class="btn btn-primary btn-sm">Generate</button>
+                                <button type="button" id="cancelPlaceholderBtn" class="btn btn-secondary btn-sm">Cancel</button>
+                            </div>
+                        </div>
+                        
+                        <span id="uploadStatus" class="upload-status">Choose an option above</span>
+                        
+                        <div id="imagePreview" class="image-preview" style="display: none;">
+                            <img id="previewImg" src="" alt="Preview">
+                            <div class="preview-actions">
+                                <button type="button" id="removeImageBtn" class="btn btn-danger btn-sm">Remove</button>
+                                <button type="button" id="changeImageBtn" class="btn btn-outline btn-sm">Change</button>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="jobImage">
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <span id="saveButtonText">Save Job</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin-script-improved.js"></script>
+</body>
+</html>
