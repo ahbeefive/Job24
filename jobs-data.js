@@ -1,6 +1,6 @@
 // Jobs Database - Update this file to change jobs for all visitors
 // This file is loaded by both the public site and admin panel
-// Last updated: 1/14/2026, 11:16:22 AM
+// Last updated: 1/14/2026, 2:02:21 PM
 
 window.JOBS_DATABASE = [
     {
@@ -40,11 +40,11 @@ window.JOBS_DATABASE = [
 
 // Site Settings - Update these to change site appearance for all visitors
 window.SITE_SETTINGS = {
-    "siteTitle": "JOB 24 ",
+    "siteTitle": "JOB 24",
     "siteDescription": "Find Job? Found Here!",
     "heroTitle": "Job Opportunity",
     "heroSubtitle": "Find Job? Found Here!",
     "template": "modern",
-    "theme": "orange",
+    "theme": "pink",
     "heroTemplate": "gradient"
 };
