@@ -1,101 +1,50 @@
-// Site Configuration - Updated by Admin Panel
-window.SITE_CONFIG = {
-    siteTitle: "JobPortal",
-    siteDescription: "Discover amazing career opportunities with top companies",
-    heroTitle: "Job Opportunity", 
-    heroSubtitle: "Discover amazing career opportunities with top companies",
-    template: "modern",
-    theme: "blue",
-    heroTemplate: "gradient",
-    lastUpdated: Date.now(),
-    jobs: [] // Jobs will be loaded from localStorage
-};
+// Jobs Database - Update this file to change jobs for all visitors
+// This file is loaded by both the public site and admin panel
+// Last updated: 1/22/2026, 8:54:43 PM
 
-// Auto-apply settings when this file loads
-(function() {
-    'use strict';
-    
-    function applyConfig() {
-        // Try to load from localStorage first (admin panel updates)
-        try {
-            const savedSettings = localStorage.getItem('jobPortalSettings');
-            if (savedSettings) {
-                const settings = JSON.parse(savedSettings);
-                Object.assign(window.SITE_CONFIG, settings);
-            }
-        } catch (e) {
-            console.log('Using default config');
-        }
-        
-        // Apply site title
-        if (window.SITE_CONFIG.siteTitle) {
-            document.title = window.SITE_CONFIG.siteTitle;
-            const logoElement = document.querySelector('.logo');
-            if (logoElement) {
-                logoElement.textContent = window.SITE_CONFIG.siteTitle;
-            }
-        }
-        
-        // Apply hero content
-        if (window.SITE_CONFIG.heroTitle) {
-            const heroTitle = document.querySelector('.hero h1');
-            if (heroTitle) {
-                heroTitle.textContent = window.SITE_CONFIG.heroTitle;
-            }
-        }
-        
-        if (window.SITE_CONFIG.heroSubtitle) {
-            const heroSubtitle = document.querySelector('.hero p');
-            if (heroSubtitle) {
-                heroSubtitle.textContent = window.SITE_CONFIG.heroSubtitle;
-            }
-        }
-        
-        // Apply template
-        if (window.SITE_CONFIG.template) {
-            document.body.setAttribute('data-template', window.SITE_CONFIG.template);
-        }
-        
-        // Apply theme
-        if (window.SITE_CONFIG.theme) {
-            document.body.setAttribute('data-theme', window.SITE_CONFIG.theme);
-            applyThemeColors(window.SITE_CONFIG.theme);
-        }
-        
-        // Apply hero template
-        if (window.SITE_CONFIG.heroTemplate) {
-            const heroElement = document.querySelector('.hero');
-            if (heroElement) {
-                heroElement.setAttribute('data-hero-template', window.SITE_CONFIG.heroTemplate);
-            }
-        }
+window.JOBS_DATABASE = [
+    {
+        "id": 1,
+        "title": "Frontend Developer",
+        "salary": "$60,000 - $80,000",
+        "location": "New York, NY",
+        "requirements": "3+ years experience with React, JavaScript, HTML, CSS. Strong understanding of responsive design and modern frontend frameworks.",
+        "applyLink": "https://example.com/apply/frontend",
+        "image": "https://via.placeholder.com/400x200/4f46e5/ffffff?text=Frontend+Developer",
+        "createdAt": 1769090070871,
+        "order": 1
+    },
+    {
+        "id": 2,
+        "title": "Backend Developer",
+        "salary": "$70,000 - $90,000",
+        "location": "San Francisco, CA",
+        "requirements": "5+ years experience with Node.js, Python, or Java. Database design and optimization skills.",
+        "applyLink": "https://example.com/apply/backend",
+        "image": "https://via.placeholder.com/400x200/059669/ffffff?text=Backend+Developer",
+        "createdAt": 1769090070871,
+        "order": 2
+    },
+    {
+        "id": 3,
+        "title": "UI/UX Designer",
+        "salary": "$55,000 - $75,000",
+        "location": "Remote",
+        "requirements": "Portfolio showcasing user-centered design solutions. Proficiency in Figma, Sketch, or Adobe Creative Suite.",
+        "applyLink": "https://example.com/apply/designer",
+        "image": "https://via.placeholder.com/400x200/ec4899/ffffff?text=UI%2FUX+Designer",
+        "createdAt": 1769090070871,
+        "order": 3
     }
-    
-    // Apply theme colors
-    function applyThemeColors(theme) {
-        const themeColors = {
-            blue: { primary: '#4f46e5', secondary: '#06b6d4', accent: '#10b981' },
-            purple: { primary: '#8b5cf6', secondary: '#a855f7', accent: '#c084fc' },
-            green: { primary: '#10b981', secondary: '#059669', accent: '#047857' },
-            orange: { primary: '#f97316', secondary: '#ea580c', accent: '#dc2626' },
-            red: { primary: '#ef4444', secondary: '#dc2626', accent: '#b91c1c' },
-            pink: { primary: '#ec4899', secondary: '#db2777', accent: '#be185d' },
-            teal: { primary: '#14b8a6', secondary: '#0d9488', accent: '#0f766e' },
-            dark: { primary: '#374151', secondary: '#4b5563', accent: '#6b7280' }
-        };
-        
-        const colors = themeColors[theme] || themeColors.blue;
-        
-        // Update CSS custom properties
-        document.documentElement.style.setProperty('--primary-color', colors.primary);
-        document.documentElement.style.setProperty('--secondary-color', colors.secondary);
-        document.documentElement.style.setProperty('--accent-color', colors.accent);
-    }
-    
-    // Initialize
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', applyConfig);
-    } else {
-        applyConfig();
-    }
-})();
+];
+
+// Site Settings - Update these to change site appearance for all visitors
+window.SITE_SETTINGS = {
+    "siteTitle": "JobPortal",
+    "siteDescription": "Discover amazing career opportunities",
+    "heroTitle": "Job Opportunity",
+    "heroSubtitle": "Discover amazing career opportunities",
+    "template": "modern",
+    "theme": "green",
+    "heroTemplate": "gradient"
+};
