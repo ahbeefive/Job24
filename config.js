@@ -1,49 +1,49 @@
 // Jobs Database - Update this file to change jobs for all visitors
 // This file is loaded by both the public site and admin panel
-// Last updated: 1/22/2026, 8:54:43 PM
+// Last updated: 1/23/2026, 5:19:11 PM
 
 window.JOBS_DATABASE = [
     {
         "id": 1,
-        "title": "Frontend Developer",
-        "salary": "$60,000 - $80,000",
-        "location": "New York, NY",
-        "requirements": "3+ years experience with React, JavaScript, HTML, CSS. Strong understanding of responsive design and modern frontend frameworks.",
-        "applyLink": "https://example.com/apply/frontend",
-        "image": "https://via.placeholder.com/400x200/4f46e5/ffffff?text=Frontend+Developer",
-        "createdAt": 1769090070871,
-        "order": 1
+        "order": 1,
+        "title": "ផ្នែកលក់ខាងក្រៅ ១៥នាក់",
+        "salary": "$300 - $600",
+        "location": "បឹងត្របែកភ្នំពេញ",
+        "requirements": "Work Schedule: Monday - Saturday\nMorning: 7:30 AM - 11:30 AM\nAfternoon: 1:30 PM - 5:30 PM \n📌Location: Phnom Penh ,Boeng Trabaek St428 No.24",
+        "applyLink": "https://t.me/Adrecruitment",
+        "image": "https://res.cloudinary.com/dvwilkvh8/image/upload/v1768362998/Sale_ne6uf9.jpg",
+        "createdAt": 1768362389703
     },
     {
         "id": 2,
-        "title": "Backend Developer",
-        "salary": "$70,000 - $90,000",
-        "location": "San Francisco, CA",
-        "requirements": "5+ years experience with Node.js, Python, or Java. Database design and optimization skills.",
-        "applyLink": "https://example.com/apply/backend",
-        "image": "https://via.placeholder.com/400x200/059669/ffffff?text=Backend+Developer",
-        "createdAt": 1769090070871,
-        "order": 2
+        "order": 2,
+        "title": "Customer Servers",
+        "salary": "$300 - $500",
+        "location": "បឹងត្របែក ភ្នំពេញ",
+        "requirements": "Work Schedule: Monday - Saturday\nMorning: 7:30 AM - 11:30 AM\nAfternoon: 1:30 PM - 5:30 PM \nLocation: Phnom Penh ,Boeng Trabaek St428 No.24",
+        "applyLink": "https://t.me/Adrecruitment",
+        "image": "https://res.cloudinary.com/dvwilkvh8/image/upload/v1768362998/CS_rryynq.jpg",
+        "createdAt": 1768362389703
     },
     {
         "id": 3,
-        "title": "UI/UX Designer",
-        "salary": "$55,000 - $75,000",
-        "location": "Remote",
-        "requirements": "Portfolio showcasing user-centered design solutions. Proficiency in Figma, Sketch, or Adobe Creative Suite.",
-        "applyLink": "https://example.com/apply/designer",
-        "image": "https://via.placeholder.com/400x200/ec4899/ffffff?text=UI%2FUX+Designer",
-        "createdAt": 1769090070871,
-        "order": 3
+        "order": 3,
+        "title": "Digital Marketing",
+        "salary": "$350 - $500",
+        "location": "Phnom Penh ,Boeng Trabaek",
+        "requirements": "-Use social media tools such as Facebook, Telegram, TikTok, and other platforms\n-Run online advertising campaigns (Facebook Ads, TikTok Ads, etc.)\n-Create designs and marketing materials\n-Edit and render videos using any suitable application\n-Willing to learn and improve skills with guidance from the company\n-At least 1 year of experience in digital marketing or related field",
+        "applyLink": "https://t.me/CarloBinze",
+        "image": "https://res.cloudinary.com/dvwilkvh8/image/upload/v1768362998/Digital_Marketing_zf1qv5.jpg",
+        "createdAt": 1768362389703
     }
 ];
 
 // Site Settings - Update these to change site appearance for all visitors
 window.SITE_SETTINGS = {
-    "siteTitle": "JobPortal",
-    "siteDescription": "Discover amazing career opportunities",
+    "siteTitle": "JOB 24",
+    "siteDescription": "Find Job? Found Here!",
     "heroTitle": "Job Opportunity",
-    "heroSubtitle": "Discover amazing career opportunities",
+    "heroSubtitle": "Find Job? Found Here!",
     "template": "modern",
     "theme": "green",
     "heroTemplate": "gradient"
