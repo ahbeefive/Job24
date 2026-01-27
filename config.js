@@ -1,6 +1,6 @@
 // Jobs Database - Update this file to change jobs for all visitors
 // This file is loaded by both the public site and admin panel
-// Last updated: 1/23/2026, 5:19:11 PM
+// Last updated: 1/27/2026, 10:30:18 AM
 
 window.JOBS_DATABASE = [
     {
@@ -15,8 +15,19 @@ window.JOBS_DATABASE = [
         "createdAt": 1768362389703
     },
     {
-        "id": 2,
+        "id": 1769483384659.2468,
         "order": 2,
+        "title": "ផ្នែកលក់ជាន់ខ្ពស់",
+        "salary": "400$ - 600$",
+        "location": "ភ្នំពេញ និង​ខេត្ត",
+        "requirements": "មានបទពិសោធន៍លក់ ភេសជ្ជៈ យ៉ាងតិច ២ឆ្នាំ \nរកអតិថិជនថ្មីៗ និងអតិថិជនធំ \n\n\nWork Schedule: Monday - Saturday Morning: 7:30 AM - 11:30 AM Afternoon: 1:30 PM - 5:30 PM",
+        "applyLink": "https://t.me/Adrecruitment",
+        "image": "https://via.placeholder.com/400x200/4f46e5/ffffff?text=%E1%9E%95%E1%9F%92%E1%9E%93%E1%9F%82%E1%9E%80%E1%9E%9B%E1%9E%80%E1%9F%8B%E1%9E%87%E1%9E%B6%E1%9E%93%E1%9F%8B%E1%9E%81%E1%9F%92%E1%9E%96%E1%9E%9F%E1%9F%8B",
+        "createdAt": 1769483384659
+    },
+    {
+        "id": 2,
+        "order": 3,
         "title": "Customer Servers",
         "salary": "$300 - $500",
         "location": "បឹងត្របែក ភ្នំពេញ",
@@ -27,7 +38,7 @@ window.JOBS_DATABASE = [
     },
     {
         "id": 3,
-        "order": 3,
+        "order": 4,
         "title": "Digital Marketing",
         "salary": "$350 - $500",
         "location": "Phnom Penh ,Boeng Trabaek",
@@ -41,10 +52,10 @@ window.JOBS_DATABASE = [
 // Site Settings - Update these to change site appearance for all visitors
 window.SITE_SETTINGS = {
     "siteTitle": "JOB 24",
-    "siteDescription": "Find Job? Found Here!",
-    "heroTitle": "Job Opportunity",
-    "heroSubtitle": "Find Job? Found Here!",
+    "siteDescription": "ឱកាសការងារពីAD\nSelect the correct position and tap Apply❤",
+    "heroTitle": "ឱកាសការងារពីAD",
+    "heroSubtitle": "Select the correct position and tap Apply❤",
     "template": "modern",
-    "theme": "green",
+    "theme": "red",
     "heroTemplate": "gradient"
 };
