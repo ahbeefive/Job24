@@ -1,6 +1,6 @@
 // Jobs Database - Update this file to change jobs for all visitors
 // This file is loaded by both the public site and admin panel
-// Last updated: 1/27/2026, 10:18:48 AM
+// Last updated: 1/27/2026, 10:21:10 AM
 
 window.JOBS_DATABASE = [
     {
@@ -56,6 +56,6 @@ window.SITE_SETTINGS = {
     "heroTitle": "ឱកាសការងារពីAD",
     "heroSubtitle": "Select the correct position and tap Apply❤",
     "template": "modern",
-    "theme": "red",
+    "theme": "blue",
     "heroTemplate": "gradient"
 };
